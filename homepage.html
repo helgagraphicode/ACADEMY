@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME</title>
+    <link rel="icon" type="image/png" href="images/icon.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+<header>
+  <div class="navbar">
+    <h1 class="logo">HelgaGraphiCode</h1>
+    <nav>
+      <ul>
+        <li><a href="homepage.html">HOME</a></li>
+        <li><a href="maintance/maintance.html">CLASS</a></li>
+        <li><a href="module.html">MODULE</a></li>
+        <li><a href="account.html">ACCOUNT</a></li>
+        <li>
+          <a id="signOutLink" href="#">
+            <span class="material-symbols-outlined">logout</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+</div>
+</header>
+<main>
+  <div class="slider-container">
+    <div class="slider">
+      <img class="slide" src="gambar1.jpg" alt="Gambar 1">
+      <img class="slide" src="gambar2.jpg" alt="Gambar 2">
+      <img class="slide" src="gambar3.jpg" alt="Gambar 3">
+    </div>
+    <!-- Tombol Navigasi -->
+    <button class="prev">&#10094;</button>
+    <button class="next">&#10095;</button>
+  </div>
+  <!-- Indikator Posisi -->
+  <div class="slide-indicators"></div>
+  <div class="about-content">
+    <h1>Selamat Datang di HelgaGraphiCode</h1>
+    <p>HelgaGraphiCode adalah komunitas yang didirikan oleh Muhammad Habib Rafi dengan visi untuk bersama-sama membangun pemahaman yang mendalam tentang dunia teknologi. Komunitas ini terbuka bagi seluruh masyarakat Indonesia dari berbagai usia dan latar belakang, dengan tujuan utama untuk saling belajar, berbagi ilmu, dan bertukar pengalaman. Di HelgaGraphiCode, para anggotanya bekerja sama untuk mengembangkan pengetahuan dan keterampilan mereka dalam bidang teknologi. Komunitas ini menyediakan berbagai platform untuk belajar dan berinteraksi, termasuk forum diskusi, workshop, kelas online, dan proyek kolaboratif. HelgaGraphiCode bercita-cita untuk menjadi komunitas yang besar dan diakui, dengan lingkungan yang positif dan kondusif bagi pembelajaran dan pengembangan diri. Komunitas ini berharap dapat memberikan kontribusi yang signifikan bagi kemajuan teknologi di Indonesia dan dunia.</p>
+  </div>
+</main>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-analytics.js";
+  import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
+  const firebaseConfig = {
+    apiKey: "AIzaSyDm5EaphiE-Xe7dERlNuhupy41_wC8d8pk",
+    authDomain: "room-helgagraphicode.firebaseapp.com",
+    databaseURL: "https://room-helgagraphicode-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "room-helgagraphicode",
+    storageBucket: "room-helgagraphicode.appspot.com",
+    messagingSenderId: "207526463810",
+    appId: "1:207526463810:web:a10dd34e196a57ca01e0db",
+    measurementId: "G-MN6EEQ6YZK"
+  };
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const auth = getAuth(app);
+  // Handle sign-out
+  document.getElementById('signOutLink').addEventListener('click', (e) => {
+    e.preventDefault();
+    signOut(auth).then(() => {
+      // Sign-out successful
+      window.location.href = 'index.html'; // Redirect to index.html after sign out
+    }).catch((error) => {
+      // An error happened
+      console.log(error);
+    });
+  });
+  // Check authentication state
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in
+      console.log('User is signed in');
+    } else {
+      // User is signed out
+      console.log('User is signed out');
+      window.location.href = 'index.html'; // Redirect to index.html if user is not signed in
+    }
+  });
+  document.addEventListener('DOMContentLoaded', function () {
+  const slides = document.querySelectorAll('.slide');
+  const totalSlides = slides.length;
+  let slideIndex = 0;
+  // Menambahkan indikator posisi
+  const slideIndicators = document.querySelector('.slide-indicators');
+  slides.forEach((slide, index) => {
+    const indicator = document.createElement('span');
+    indicator.classList.add('indicator');
+    if (index === 0) indicator.classList.add('active');
+    indicator.setAttribute('onclick', `currentSlide(${index + 1})`);
+    slideIndicators.appendChild(indicator);
+  });
+  // Fungsi untuk menampilkan slide berdasarkan indeks
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      if (i === index) {
+        slide.style.display = 'block';
+      } else {
+        slide.style.display = 'none';
+      }
+    });
+
+    updateIndicators(index);
+  }
+  // Fungsi untuk memperbarui indikator posisi
+  function updateIndicators(index) {
+    const indicators = document.querySelectorAll('.indicator');
+    indicators.forEach((indicator, i) => {
+      if (i === index) {
+        indicator.classList.add('active');
+      } else {
+        indicator.classList.remove('active');
+      }
+    });
+  }
+  // Menambahkan event listener untuk tombol navigasi
+  document.querySelector('.prev').addEventListener('click', function() {
+    slideIndex--;
+    if (slideIndex < 0) {
+      slideIndex = totalSlides - 1;
+    }
+    showSlide(slideIndex);
+  });
+  document.querySelector('.next').addEventListener('click', function() {
+    slideIndex++;
+    if (slideIndex >= totalSlides) {
+      slideIndex = 0;
+    }
+    showSlide(slideIndex);
+  });
+  // Fungsi untuk menggeser slide saat indikator posisi ditekan
+  function currentSlide(n) {
+    slideIndex = n - 1;
+    showSlide(slideIndex);
+  }
+  // Tampilkan slide pertama saat halaman dimuat
+  showSlide(slideIndex);
+});
+const menuIcon = document.querySelector(".menu-icon");
+  const navMenu = document.querySelector("nav ul");
+
+  menuIcon.addEventListener("click", () => {
+    navMenu.classList.toggle("active");
+  });
+
+</script>
+<footer>
+  <div class="footer-content">
+    <p>&copy; 2024 HelgaGraphiCode. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

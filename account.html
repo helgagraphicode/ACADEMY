@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACCOUNT</title>
+    <link rel="icon" type="image/png" href="images/icon.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+      body {
+          background-color: #482666;
+          color: #ffffff;
+          font-family: Arial, sans-serif;
+      }
+  
+      .account-box {
+          background-color: #482666;
+          padding: 30px;
+          border-radius: 8px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          margin: 50px auto;
+          max-width: 600px;
+          text-align: center;
+      }
+  
+      .account-box h2 {
+          color: #ffffff;
+          font-size: 24px;
+          margin-bottom: 20px;
+      }
+  
+      .account-info {
+          margin-bottom: 20px;
+          text-align: left;
+      }
+  
+      .account-info p {
+          margin: 10px 0;
+          display: flex;
+          justify-content: space-between;
+      }
+  
+      .account-info p strong {
+          color: #ffffff; /* Warna teks label */
+          margin-right: 10px; /* Jarak antara label dan nilai */
+          min-width: 100px; /* Lebar minimum untuk label */
+          display: inline-block; /* Agar label dan nilai diatur dalam satu baris */
+      }
+  
+      .contact-admin {
+          margin-top: 20px;
+          font-style: italic;
+          color: #ffffff;
+      }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <h1 class="logo">HelgaGraphiCode</h1>
+            <nav>
+                <ul>
+                    <li><a href="homepage.html">HOME</a></li>
+                    <li><a href="/maintance/maintance.html">CLASS</a></li>
+                    <li><a href="module.html">MODULE</a></li>
+                    <li><a href="account.html">ACCOUNT</a></li>
+                    <li>
+                        <a id="signOutLink" href="#">
+                            <span class="material-symbols-outlined">logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="account-box">
+            <h2>Account Information</h2>
+            <div class="account-info">
+                <p><strong>Email:</strong> <span id="userEmail"></span></p>
+                <p><strong>Status:</strong> <span id="userStatus"></span></p>
+                <p><strong>Role:</strong> <span id="userRole"></span></p>
+                <p><strong>Last Login:</strong> <span id="lastLogin"></span></p>
+            </div>
+            <p class="contact-admin">If you want to change your password, please contact admin at <a href="mailto:helgagraphicode@gmail.com">helgagraphicode@gmail.com</a></p>
+        </div>
+    </main>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-analytics.js";
+        import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
+        
+        const firebaseConfig = {
+          apiKey: "AIzaSyDm5EaphiE-Xe7dERlNuhupy41_wC8d8pk",
+          authDomain: "room-helgagraphicode.firebaseapp.com",
+          databaseURL: "https://room-helgagraphicode-default-rtdb.asia-southeast1.firebasedatabase.app",
+          projectId: "room-helgagraphicode",
+          storageBucket: "room-helgagraphicode.appspot.com",
+          messagingSenderId: "207526463810",
+          appId: "1:207526463810:web:a10dd34e196a57ca01e0db",
+          measurementId: "G-MN6EEQ6YZK"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+        
+        const userEmail = document.getElementById('userEmail');
+        const userStatus = document.getElementById('userStatus');
+        const userRole = document.getElementById('userRole');
+        const lastLogin = document.getElementById('lastLogin');
+        
+        // Handle sign-out
+        document.getElementById('signOutLink').addEventListener('click', (e) => {
+          e.preventDefault();
+          signOut(auth).then(() => {
+            // Sign-out successful
+            window.location.href = 'index.html'; // Redirect to index.html after sign out
+          }).catch((error) => {
+            // An error happened
+            console.log(error);
+          });
+        });
+        
+        // Check authentication state
+        onAuthStateChanged(auth, async (user) => {
+          if (user) {
+            // User is signed in
+            console.log('User is signed in');
+            // Display user information
+            userEmail.textContent = user.email;
+            userStatus.textContent = "Active"; // Example: Assuming status is managed elsewhere
+            userRole.textContent = "Member"; // Example: Assuming role is managed elsewhere
+            
+            // Get last sign-in time
+            const lastSignInTime = user.metadata.lastSignInTime;
+            lastLogin.textContent = lastSignInTime;
+          } else {
+            // User is signed out
+            console.log('User is signed out');
+            window.location.href = 'index.html'; // Redirect to index.html if user is not signed in
+          }
+        });
+    </script>
+</body>
+</html>

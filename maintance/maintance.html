@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ERROR</title>
+    <link rel="icon" type="image/png" href="images/icon.png">
+    <meta name="robots" content="noindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #000000;
+            font-family: 'Material Icons Outlined', sans-serif;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        article {
+            max-width: 600px;
+            width: 100%;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            animation: slide-in 0.5s ease-out forwards;
+        }
+        @keyframes slide-in {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .btn-home {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #482666;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .btn-home:hover {
+            background-color: #482666;
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <h1>ERROR</h1>
+        <div>
+            <p>Masih dalam tahap Pengembangan!</p>
+            <p>support@helga</p>
+        </div>
+        <a href="/homepage.html" class="btn-home">Back to Homepage</a>
+    </article>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const article = document.querySelector('article');
+            article.classList.add('animated');
+        });
+    </script>
+</body>
+</html>

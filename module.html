@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MODULE</title>
+    <link rel="icon" type="image/png" href="images/icon.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+<header>
+    <div class="navbar">
+      <h1 class="logo">HelgaGraphiCode</h1>
+      <nav>
+        <ul>
+            <li><a href="homepage.html">HOME</a></li>
+            <li><a href="maintance/maintance.html">CLASS</a></li>
+            <li><a href="module.html">MODULE</a></li>
+            <li><a href="account.html">ACCOUNT</a></li>
+            <li>
+                <a id="signOutLink" href="#">
+                  <span class="material-symbols-outlined">logout</span>
+                </a>
+              </li>  
+        </ul>
+      </nav>
+    </div>
+  </header> 
+  <main>
+  </main>
+  <body>
+    <div class="file-box">
+      <div class="file-info">
+        <h3 class="file-name">Ringkasan Teknik Dasar Keamanan Siber</h3>
+        <span class="file-logo"><i class="material-icons">description</i></span>
+        <p class="file-category">Kategori : Cyber Security</p>
+      </div>
+      <div class="file-actions">
+        <a href="Ringkasan Teknik Dasar Keamanan Siber.pdf" class="btn-download">Download</a>
+      </div>
+    </div>
+    <div class="file-box">
+        <div class="file-info">
+          <h3 class="file-name">Mahasiswa Cerdas Investasi Bijak</h3>
+          <span class="file-logo"><i class="material-icons">description</i></span>
+          <p class="file-category">Kategori : Investasi</p>
+        </div>
+        <div class="file-actions">
+          <a href="Mahasiswa Cerdas Investasi Bijak.pdf" class="btn-download">Download</a>
+        </div>
+      </div>
+      <footer>
+        <div class="footer-content">
+          <p>&copy; 2024 HelgaGraphiCode. All rights reserved.</p>
+        </div>
+      </footer>
+  </body>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-analytics.js";
+    import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
+    
+    const firebaseConfig = {
+      apiKey: "AIzaSyDm5EaphiE-Xe7dERlNuhupy41_wC8d8pk",
+      authDomain: "room-helgagraphicode.firebaseapp.com",
+      databaseURL: "https://room-helgagraphicode-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "room-helgagraphicode",
+      storageBucket: "room-helgagraphicode.appspot.com",
+      messagingSenderId: "207526463810",
+      appId: "1:207526463810:web:a10dd34e196a57ca01e0db",
+      measurementId: "G-MN6EEQ6YZK"
+    };
+  
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+  
+    // Handle sign-out
+    document.getElementById('signOutLink').addEventListener('click', (e) => {
+      e.preventDefault();
+      signOut(auth).then(() => {
+        // Sign-out successful
+        window.location.href = 'index.html'; // Redirect to index.html after sign out
+      }).catch((error) => {
+        // An error happened
+        console.log(error);
+      });
+    });
+  
+    // Check authentication state
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in
+        console.log('User is signed in');
+      } else {
+        // User is signed out
+        console.log('User is signed out');
+        window.location.href = 'index.html'; // Redirect to index.html if user is not signed in
+      }
+    });
+  </script>
+</html>

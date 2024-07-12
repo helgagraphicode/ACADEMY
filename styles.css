@@ -1,0 +1,341 @@
+/* CSS Dasar */
+@media (max-width: 768px) {
+  .navbar nav ul {
+    display: none; /* Sembunyikan menu navigasi di layar kecil */
+  }
+
+  .navbar .menu-icon {
+    display: block; /* Tampilkan ikon menu di layar kecil */
+  }
+
+  .navbar nav ul.active {
+    display: flex; /* Tampilkan menu navigasi saat ikon menu diklik */
+    flex-direction: column; /* Atur arah menu navigasi secara vertikal */
+  }
+}
+
+@media (min-width: 769px) {
+  .navbar .menu-icon {
+    display: none; /* Sembunyikan ikon menu di layar besar */
+  }
+
+  .navbar nav ul {
+    display: flex;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  position: relative; /* Tambahkan posisi relatif agar pseudo-element dapat ditempatkan secara absolut */
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw; /* Lebar sesuai dengan lebar viewport */
+  height: 100vh; /* Tinggi sesuai dengan tinggi viewport */
+  background-image: url('background.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px) brightness(0.5); /* Efek blur dan kecerahan gambar */
+  z-index: -1;
+}
+
+.content {
+  position: relative; /* Pastikan konten utama berada di atas latar belakang */
+  z-index: 1; /* Letakkan konten utama di atas lapisan blur */
+  /* tambahkan properti lainnya sesuai dengan kebutuhan Anda */
+}
+
+.navbar {
+  background-color: #482666;
+  color: white;
+  padding: 15px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: white;
+  margin: 0;
+}
+
+.navbar nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.navbar nav ul li {
+  padding: 10px;
+}
+
+.navbar nav ul li a {
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.navbar nav ul li a:hover {
+  color: #ddd;
+}
+
+.slider-container {
+  width: 100%;
+  max-width: 600px;
+  overflow: hidden;
+  position: relative;
+  margin: 20px auto;
+}
+
+.slider {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.slide {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.prev,
+.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 18px;
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+.slide-indicators {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: #482666;
+  border-radius: 50%;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: #482666;
+  border-radius: 50%;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.indicator.active {
+  background-color: #000000;
+}
+
+#auth-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(111, 0, 255, 0.1);
+  background-color: #482666; /* Ubah background form menjadi ungu */
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input,
+button {
+  padding: 12px;
+  border-radius: 6px;
+}
+
+button:hover {
+  background-color: #482666;
+}
+
+p {
+  text-align: center;
+  margin-top: 10px;
+  color: #000000;
+}
+
+span {
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.file-box {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.file-info {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.file-name {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.file-logo {
+  font-size: 48px;
+  color: #482666;
+}
+
+.file-logo i {
+  vertical-align: middle;
+}
+
+.file-category {
+  margin-top: 5px;
+  color: #482666;
+}
+
+.file-actions {
+  margin-top: 10px;
+}
+
+.btn-download {
+  padding: 10px 20px;
+  background-color: #482666;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-download:hover {
+  background-color: #482666;
+}
+
+#signOutLink {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+#signOutLink .material-symbols-outlined {
+  font-size: 24px;
+  margin-right: 5px;
+}
+
+#signOutLink:hover {
+  color: #ddd;
+}
+
+h1 {
+  text-align: center;
+  color: #000;
+  margin: 20px 0;
+  font-size: 2em;
+}
+
+@media (max-width: 768px) {
+  #auth-container {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar nav ul li {
+    margin-bottom: 10px;
+  }
+}
+
+.material-symbols-outlined {
+  font-size: 24px;
+  color: white;
+}
+
+.about-content {
+  background-color: #482666;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 50px auto 100px; /* Menyesuaikan margin untuk atas dan bawah */
+  max-width: 600px;
+}
+
+.about-content h1 {
+  text-align: center;
+  color: #000000;
+}
+
+.about-content p {
+  text-align: justify;
+  margin-bottom: 15px;
+}
+/* CSS untuk Footer */
+footer {
+  background-color: #482666;
+  color: rgb(255, 255, 255);
+  padding: 20px 0;
+  text-align: center;
+  position: fixed; /* Menjadikan footer posisi tetap */
+  bottom: 0; /* Menempelkan footer di bagian bawah */
+  width: 100%; /* Lebar footer mengikuti lebar layar */
+  z-index: 999; /* Mengatur z-index agar footer tetap di atas konten */
+}
+
+.footer-content {
+  display: flex;
+  justify-content: center; /* Mengatur konten footer menjadi berada di tengah */
+  align-items: center;
+}
+
+.footer-content p {
+  margin: 0;
+  color: #fff; /* Warna teks putih */
+}
+
+.menu-icon {
+  display: none;
+}
