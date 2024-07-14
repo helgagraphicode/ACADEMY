@@ -202,13 +202,13 @@ span {
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
-  flex-direction: column;
+  justify-content: space-between; /* Align children elements horizontally */
   align-items: center;
 }
 
 .file-info {
-  text-align: center;
-  margin-bottom: 10px;
+  display: flex; /* Ensure file info items are displayed in a row */
+  align-items: center;
 }
 
 .file-name {
@@ -220,6 +220,7 @@ span {
 .file-logo {
   font-size: 48px;
   color: #482666;
+  margin-right: 10px; /* Adjust spacing between logo and text */
 }
 
 .file-logo i {
@@ -227,12 +228,16 @@ span {
 }
 
 .file-category {
-  margin-top: 5px;
   color: #482666;
 }
 
 .file-actions {
-  margin-top: 10px;
+  display: flex; /* Display file actions in a row */
+  align-items: center;
+}
+
+.file-actions button {
+  margin-right: 10px; /* Adjust spacing between action buttons */
 }
 
 .btn-download {
